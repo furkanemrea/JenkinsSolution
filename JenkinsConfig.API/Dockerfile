@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["JenkinsConfig.API/JenkinsConfig.API.csproj", "JenkinsConfig.API/"]
-RUN dotnet restore "JenkinsConfig.API/JenkinsConfig.API.csproj"
+COPY ["JenkinsConfig.API.csproj", "./"]
+RUN dotnet restore "JenkinsConfig.API.csproj"
 COPY . .
-WORKDIR "/src/JenkinsConfig.API"
+WORKDIR "/src/."
 RUN dotnet build "JenkinsConfig.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
